@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	// _ 表示对包做初始化操作（init函数），但不使用包里的标识符
 	_ "github.com/goinaction/code/chapter2/sample/matchers"
 	"github.com/goinaction/code/chapter2/sample/search"
 )

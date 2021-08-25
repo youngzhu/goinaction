@@ -9,6 +9,7 @@ const dataFile = "data/data.json"
 
 // Feed contains information we need to process a feed.
 type Feed struct {
+	// `` 被称作标记（tag），用于描述JSON的元数据
 	Name string `json:"site"`
 	URI  string `json:"link"`
 	Type string `json:"type"`

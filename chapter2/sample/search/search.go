@@ -44,6 +44,7 @@ func Run(searchTerm string) {
 	// Launch a goroutine to monitor when all the work is done.
 	go func() {
 		// Wait for everything to be processed.
+		// 阻塞，直到计数为0
 		waitGroup.Wait()
 
 		// Close the channel to signal to the Display
