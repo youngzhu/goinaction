@@ -19,5 +19,5 @@ func init() {
 // main is the entry point for the program.
 func main() {
 	// Perform the search for the specified term.
-	search.Run("president")
+	search.Run("China")
 }
