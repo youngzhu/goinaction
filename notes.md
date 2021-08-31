@@ -194,3 +194,64 @@ slice := [][]int{{10}, {100, 200}}
 
 slice[0] = append(slice[0], 20)
 ```
+
+### Map
+#### 创建和初始化
+**由于切片/函数以及包含切片的结构类型具有引用语义，不能作为键类型**
+```Go
+// 使用make
+// 创建一个键类型是string，值类型是int的映射
+dict := make(map[string]int)
+
+// 使用键值对
+dict := map[string]string{"Read":"#da1337", "Orange":"#e95a22"}
+```
+
+#### 使用
+```Go
+colors := map[string]string{}
+colors["Red"] = "#da1337"
+
+// nil 映射（未初始化）不能赋值
+// 通过声明创建一个nil映射
+var colors map[string]string
+colors["Red"] = "#da1337" // 编译错误
+
+// 从映射获取值并判断是否存在
+value, exists := colors["Blue"]
+if exists {
+    fmt.Println(value)
+}
+
+// 从映射中取值，并通过该值判断其键是否存在
+// Go语言里，通过键来索引映射时，即便这个键不存在也会返回一个值
+// 返回该类型的“零值”，如string就是""，int就是0
+value := colors["Blue"]
+if value != "" {
+    fmt.Println(value)
+}
+
+// 使用range迭代映射
+// 返回的是键值对
+for key, value := range colors {
+    fmt.Println("Key: %s Value: %s\n", key, value)
+}
+
+// 从映射中删除一项
+// 使用内置函数 delete
+delete(colors, "Coral")
+```
+
+#### 在函数间的传递
+和切片类似，不会创建副本。修改会反应到所有的引用上。详见，map.go
+
+### 小结
+- 数组是构造切片和映射的基石
+- 切片用来处理数据的集合，映射用来处理键值对结构的数据
+- 内置函数make可以创建切片和映射，并指定长度和容量
+- 切片有容量限制，不过可以使用内置函数append扩展容量
+- 映射的增长没有容量或其他任何限制
+- 内置函数len可以用来获取切片或映射的长度
+- 内置函数cap只能用于切片
+- 切片不能用作映射的键
+- 将切片或映射传递给函数成本很小，并且不会复制底层的数据结构
