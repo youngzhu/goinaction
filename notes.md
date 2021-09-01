@@ -255,3 +255,69 @@ delete(colors, "Coral")
 - 内置函数cap只能用于切片
 - 切片不能用作映射的键
 - 将切片或映射传递给函数成本很小，并且不会复制底层的数据结构
+
+## ch05 类型系统
+### 5.1 自定义类型
+```Go
+// 自定义一个结构类型
+type user struct {
+    name string
+    email string
+    ext int
+    privileged bool
+}
+
+// 声明一个类型变量，其初始值都为“零值”
+var bill user
+
+// 初始化所有值
+// 顺序没要求
+lisa := user{
+    name:"Lisa",
+    email:"lisa.email.com"
+    ext:123,
+    privileged:true,
+}
+// 也可以这样
+// 顺序必须与声明中的一样
+lisa := user{"Lisa", "lisa@mail.com", 123, true}
+
+// 使用其他结构类型声明字段
+// admin 需要一个user类型作为管理者，并附加权限
+type admin struct {
+    person user
+    level string
+}
+
+fred := admin {
+    person: user {
+        name: "Lisa",
+        email: "lisa@mail.com",
+        ext: 123, 
+        privileged: true,
+    }, 
+    level: "super"
+}
+
+// 基于已有的类型定义一个类型
+type Duration int64
+// 虽然这样定义，但Duration和int64不是同一种类型
+// 以下代码会有编译错误
+var dur Duration
+dur = int64(10000)
+```
+
+### 5.2 方法
+如果使用值接收者声明方法，调用时会使用这个值得一个副本来执行。
+```Go
+// list11.go
+// 指针变量调用值接收者方法
+// 可以认为Go编译器做了如下操作
+(*lisa).notify() // 被转换为指针所指向的值
+
+// 值变量调用指针接收者方法
+// 编译器背后的动作
+(&bill).changeEmail("")
+```
+
+### 5.3 类型的本质
