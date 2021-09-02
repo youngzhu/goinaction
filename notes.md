@@ -321,3 +321,25 @@ dur = int64(10000)
 ```
 
 ### 5.3 类型的本质
+#### 5.3.1 内置类型
+#### 5.3.2 引用类型
+Go语言里有以下几个引用类型：切片/映射/通道/接口和函数类型。
+#### 5.3.3 结构类型
+```Go
+// golang.org/src/os/file.go
+// 即使没有修改接收者的值，依然是用指针接收者来声明的。
+// 因为File类型的值具备非原始的本质，所以总是应该被共享，而不是被复制
+
+// 是使用值接收者还是指针接收者，不应该由该方法是否修改了入参值来决定。
+// 应该基于该类型的本质
+func (f *File) Chdir() error {
+    if f == nil {
+        return ErrInvalid
+    }
+    if e := syscall.Fchdir(f.fd); e != nil {
+        return &PathError("chdir", f.name, e)
+    }
+    return nil
+}
+```
+### 5.4 接口
