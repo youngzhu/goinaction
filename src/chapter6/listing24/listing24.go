@@ -43,6 +43,7 @@ func main() {
 
 	// Close the channel so the goroutines will quit
 	// when all the work is done.
+	// 通道关闭后，可以从通道接收数据，但是不能向通道发送数据
 	close(tasks)
 
 	// Wait for all the work to get done.
