@@ -6,7 +6,7 @@ import (
 )
 
 func init() {
-	log.SetPrefix("TRACE: ")
+	// log.SetPrefix("TRACE: ")
 	log.SetFlags(log.Ldate | log.Lmicroseconds | log.Llongfile)
 }
 

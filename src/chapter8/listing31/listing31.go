@@ -18,7 +18,8 @@ func main() {
 	}
 
 	// Marshal the map into a JSON string.
-	data, err := json.MarshalIndent(c, "", "    ")
+	// data, err := json.MarshalIndent(c, "", "    ")
+	data, err := json.Marshal(c)
 	if err != nil {
 		log.Println("ERROR:", err)
 		return
