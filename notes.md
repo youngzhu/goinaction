@@ -436,6 +436,7 @@ value := <-buffered
 
 
 ```Go
+// go test -v -run="none" -bench=. -benchtime="3s" -benchmem
 func BenchmarkSprintf(b *testing.B) {
     number := 10
 
